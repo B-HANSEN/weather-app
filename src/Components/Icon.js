@@ -5,6 +5,9 @@ class Icon extends React.Component {
 
 
 
+    render () {
+            return
+    }
 
 }
 

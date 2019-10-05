@@ -8,23 +8,20 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      
       <header className="App-header">
-
-      <h3>Awesome Weather App</h3>
+        <h3>Awesome Weather App</h3>
       </header>
 
       <main>
      
-      <figure>
-        <Icon />
+        <figure>
+            <Icon />
+            <Toggle />
+        </figure>
 
-        <Toggle />
-      </figure>
-
-      <Icon />
-
-      <Time />
-      <Button />
+        <Time />
+        <Button />
 
       </main>
 
