@@ -1,23 +1,21 @@
-import React from 'react';
+import React from "react";
+// import './styles/time.css';
 
+const Time = props => {
 
-class Time extends React.Component {
+  return (
 
-    render () {
-        return (
-            <div>
-                <h3>Sunrise</h3>           
-                <p>7:32</p>
+      <div>
+           
+        {/* Get Times*/}
+             <h1>{ props.sunrise } &deg;</h1>
+             <h1>{ props.sunset } &deg;</h1>
+     
+      </div>
+  );
+};
 
-                <h3>Sunset</h3>     
-                <p>19:20</p>    
-            </div>
-        )
-    }
-}
-
-
-export default Time
+export default Time;
 
 
 
