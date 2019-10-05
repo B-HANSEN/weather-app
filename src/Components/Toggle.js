@@ -8,12 +8,14 @@ class Toggle extends React.Component {
 
         return (
 
-            <div>
+            <div className="temp">
 
+                <h4>ºC</h4>
                 <label className="switch">
                     <input type="checkbox" />
                     <span className="slider round"></span>
                 </label>
+                <h4>ºF</h4>
         
 
             </div>
