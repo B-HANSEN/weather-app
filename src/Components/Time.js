@@ -4,11 +4,16 @@ import React from 'react';
 class Time extends React.Component {
 
     render () {
-        return
+        return (
+            <div>
+                <h3>Sunrise</h3>           
+                <p>7:32</p>
+
+                <h3>Sunset</h3>     
+                <p>19:20</p>    
+            </div>
+        )
     }
-
-
-
 }
 
 

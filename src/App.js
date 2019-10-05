@@ -17,12 +17,12 @@ function App() {
      
         <figure>
             <Icon />
-            <Toggle />
+            <Time />
+            <Button />
         </figure>
 
-        <Time />
-        <Button />
-
+        <Toggle />
+        
       </main>
 
 
