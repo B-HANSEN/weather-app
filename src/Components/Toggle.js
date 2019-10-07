@@ -2,11 +2,7 @@ import React from 'react';
 import './styles/toggle.css';
 
 class Toggle extends React.Component {
-
-
-toggleUnit() {
-
-}
+toggleUnit() {}
 
     render () {
 

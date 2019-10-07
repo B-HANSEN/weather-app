@@ -1,21 +1,34 @@
 import React from 'react';
+import Select from 'react-select';
 import './styles/city.css';
 
-
-const City = props => {
-    
-        return (
-            <div className="dropdown">
-                <button className="dropbtn">Dropdown</button>
-                    <div className="dropdown-content">
-                        <a href="#" onClick= { props.loadweather } value= "Lisbon"> Lisbon</a>
-                        <a href="#" onClick={ props.loadweather } value= "Ney York">New York</a>
-                        <a href="#" onClick={ props.loadweather } value= "London">London</a>
-                    </div>
-            </div>
-        )
-};
+const options = [
+    { value: 'Lisbon', label: 'Lisbon' },
+    { value: 'New York', label: 'New York' },
+    { value: 'London', label: 'London' },
+];
 
 
+class City extends React.Component {
+    state = { 
+        selectedOption: null     
+    };
+
+    selectedOption = (option) => {   
+        this.props.loadweather(option.value);
+    }
+
+        render() {
+            const { selectedOption } = this.state;
+
+            return (
+                    <Select
+                        value={selectedOption}
+                        onChange={this.selectedOption}
+                        options={options}
+                    />
+            );
+        }
+}
 
 export default City

@@ -25,3 +25,12 @@ figure {
   display: flex;
   flex-direction: column;
 }
+
+img {
+  width: 50%;
+  align-self: center;
+}
+
+.dropdown {
+  width: 200px;
+}

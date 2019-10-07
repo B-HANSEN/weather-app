@@ -6,7 +6,7 @@ const Icon = props => {
   return (
     
       <div>
-            <h1>{props.cityname}</h1>
+            <h1>{props.city}</h1>
             <h5>
                 <i className={`wi ${props.weatherIcon}`} />
             </h5>
