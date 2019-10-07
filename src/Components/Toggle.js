@@ -14,7 +14,7 @@ toggleUnit() {}
 
                 <label className="switch">
                     <input type="checkbox"
-                    // onChange="toggleUnit()"
+                    onChange="toggleUnit()"
                      />
                     <span className="slider round"></span>
                 </label>

@@ -10,6 +10,7 @@ const options = [
 
 
 class City extends React.Component {
+    // TODO: setup default value
     state = { 
         selectedOption: null     
     };

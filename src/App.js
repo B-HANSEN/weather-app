@@ -1,6 +1,5 @@
 import React from 'react';
 import Toggle from './Components/Toggle'
-// import Icon from './Components/Icon'
 import Time from './Components/Time'
 import City from './Components/City'
 import './App.css';
@@ -34,7 +33,6 @@ calFahrenheit(cell) {
 getWeather = async (selectedOption) => {
 
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${selectedOption}&appid=${Api_Key}`)
-    // http://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=c1d79600e28a5b4a4ef959688dfa55d3
 
     const response = await api_call.json();
     console.log(response);
@@ -44,8 +42,8 @@ getWeather = async (selectedOption) => {
       main: response.weather[0].main,
       celsius: this.calCelsius(response.main.temp),
       fahrenheit: this.calFahrenheit(response.main.temp),
-      sunset: response.sys.sunset,
-      sunrise: response.sys.sunrise,
+      sunset: new Date(response.sys.sunset).toLocaleTimeString("en-US"),
+      sunrise: new Date(response.sys.sunrise).toLocaleTimeString("en-US"),
       description: response.weather[0].description,
       error: false,
       icon : response.weather[0].icon
@@ -64,13 +62,15 @@ getWeather = async (selectedOption) => {
               <main>
                 <figure>
                   
-                  <img src={`https://openweathermap.org/img/wn/${this.state.icon}.png`} />
+                  <img src={`https://openweathermap.org/img/wn/${this.state.icon}.png`} alt="" />
 
+          {/* TODO: revise time code to actual time */}
                   <Time
                     sunset={this.state.sunset}
                     sunrise={this.state.sunrise}
                   />
 
+          {/* TODO: add label to drop-down */}
                   <City className="dropdown"
                     city={this.state.city}
                     loadweather={this.getWeather}
@@ -87,3 +87,5 @@ getWeather = async (selectedOption) => {
 }
 
 export default App;
+
+

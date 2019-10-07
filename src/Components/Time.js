@@ -4,13 +4,11 @@ import React from "react";
 const Time = props => {
 
   return (
-
       <div>
            
         {/* Get Times*/}
              <h1>{ props.sunrise } </h1>
              <h1>{ props.sunset } </h1>
-     
       </div>
   );
 };
