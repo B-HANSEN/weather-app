@@ -5,35 +5,45 @@ import City from './Components/City'
 import './App.css';
 
 const Api_Key = "c1d79600e28a5b4a4ef959688dfa55d3";
+// http://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=c1d79600e28a5b4a4ef959688dfa55d3
 
 class App extends React.Component {
    state = {
-      city: undefined,
-      icon: undefined,
-      main: undefined,
-      celsius: undefined,
-      fahrenheit: undefined,
-      sunset: null,
-      sunrise: null,
+      city: null,
+      icon: null,
+      main: null,
+      celsius: null,
+      fahrenheit: null,
+      formatteSunset: null,
+      formattedSunrise: null,
       description: "",
       error: false,
       selectedOption: null
     };
 
 calCelsius(temp) {
-  let cell = Math.floor(temp - 273.15);
-  return cell;
+  let celsius = Math.floor(temp - 273.15);
+  return celsius;
 }
 
-calFahrenheit(cell) {
-  let fahrenheit = Math.floor(9/5 * cell + 32);
+calFahrenheit(celsius) {
+  let fahrenheit = Math.floor(9/5 * celsius + 32);
   return fahrenheit;
 }
 
+calUnix(t) {
+  var dt = new Date(t*1000);
+  var hr = dt.getHours();
+  var m = "0" + dt.getMinutes();
+  return hr + ':' + m.substr(-2)
+}
+
+switchTemp = (checked) => { 
+  this.setState({ checked: checked })
+};
+
 getWeather = async (selectedOption) => {
-
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${selectedOption}&appid=${Api_Key}`)
-
     const response = await api_call.json();
     console.log(response);
 
@@ -41,15 +51,13 @@ getWeather = async (selectedOption) => {
       city: `${response.name}`,
       main: response.weather[0].main,
       celsius: this.calCelsius(response.main.temp),
-      fahrenheit: this.calFahrenheit(response.main.temp),
-      sunset: new Date(response.sys.sunset).toLocaleTimeString("en-US"),
-      sunrise: new Date(response.sys.sunrise).toLocaleTimeString("en-US"),
+      fahrenheit: this.calFahrenheit(this.calCelsius(response.main.temp)),
+      formattedSunrise: this.calUnix(response.sys.sunrise),
+      formattedSunset: this.calUnix(response.sys.sunset),
       description: response.weather[0].description,
       error: false,
       icon : response.weather[0].icon
     });
-
-    console.log(response);
 };
 
       render () {
@@ -58,27 +66,34 @@ getWeather = async (selectedOption) => {
               <header className="App-header">
                 <h3>Awesome Weather App</h3>
               </header>      
-
+              
               <main>
                 <figure>
                   
                   <img src={`https://openweathermap.org/img/wn/${this.state.icon}.png`} alt="" />
-
-          {/* TODO: revise time code to actual time */}
+                  { this.state.checked
+                    ? <p>{ this.state.celsius } °C </p>
+                    : <p>{ this.state.fahrenheit } °F </p>
+                  }
+                  { this.state.description }
+                
+          {/* TODO: revise time code to actual local time */}
                   <Time
-                    sunset={this.state.sunset}
-                    sunrise={this.state.sunrise}
+                    sunset={ this.state.formattedSunset }
+                    sunrise={ this.state.formattedSunrise }
                   />
 
           {/* TODO: add label to drop-down */}
                   <City className="dropdown"
-                    city={this.state.city}
-                    loadweather={this.getWeather}
-                    error={this.state.error}
+                    city={ this.state.city }
+                    loadweather={ this.getWeather }
+                    error={ this.state.error }
                   />
                 </figure>
 
-                <Toggle /> 
+                <Toggle
+                  toggleTemp= { this.switchTemp }
+                /> 
               </main>
 
           </div>

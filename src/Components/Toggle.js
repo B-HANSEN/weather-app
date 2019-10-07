@@ -1,11 +1,22 @@
 import React from 'react';
 import './styles/toggle.css';
 
+
+
 class Toggle extends React.Component {
-toggleUnit() {}
+    state = {
+        checked: false,
+        // type: true
+    };
+
+    selectedUnit = (checked) => {   
+    // selectedUnit = (type) => {   
+        this.setState({ checked: !this.state.checked });
+        // this.props.toggleTemp(type);
+        this.props.toggleTemp(this.state.checked);
+    }
 
     render () {
-
         return (
 
             <div className="temp">
@@ -13,31 +24,19 @@ toggleUnit() {}
                 <h4>ºC</h4>
 
                 <label className="switch">
-                    <input type="checkbox"
-                    onChange="toggleUnit()"
-                     />
+                    <input
+                        type="checkbox"
+                        onClick={ this.selectedUnit }
+                    />
                     <span className="slider round"></span>
                 </label>
 
                 <h4>ºF</h4>
         
-
             </div>
 
         )   
     }
 }
 
-{/* <div className='buttons'>
-<div className='btn'>
-  {props.tempSymbol === 'C' ?
-    <button className='clicked'>C</button>
-    :
-    <button onClick={props.setTempSymbol}>C</button>
-  }
-  <p>Celsius</p>
-</div> */}
-
 export default Toggle
-
-

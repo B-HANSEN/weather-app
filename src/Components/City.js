@@ -24,9 +24,10 @@ class City extends React.Component {
 
             return (
                     <Select
-                        value={selectedOption}
-                        onChange={this.selectedOption}
-                        options={options}
+                        value={ selectedOption }
+                        onChange={ this.selectedOption }
+                        options={ options }
+                        defaultValue={{ value: 'Lisbon', label: 'Lisbon' }}
                     />
             );
         }
