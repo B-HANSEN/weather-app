@@ -1,14 +1,16 @@
 import React from "react";
-// import './styles/time.css';
+import './styles/time.css';
 
 const Time = props => {
 
   return (
-      <div>
+      <div className="times">
            
         {/* Get Times*/}
-             <h1>{ props.sunrise } </h1>
-             <h1>{ props.sunset } </h1>
+            <h3>Sunrise</h3>
+              <p>{ props.sunrise } </p>
+            <h3>Sunset</h3>
+             <p>{ props.sunset } </p>
       </div>
   );
 };

@@ -71,10 +71,10 @@ getWeather = async (selectedOption) => {
                   
                   <img src={`https://openweathermap.org/img/wn/${this.state.icon}.png`} alt="" />
                   { !this.state.checked
-                    ? <p>{ this.state.celsius } °C </p>
-                    : <p>{ this.state.fahrenheit } °F </p>
+                    ? <h3>{ this.state.celsius } °C </h3>
+                    : <h3>{ this.state.fahrenheit } °F </h3>
                   }
-                  { this.state.description }
+                  <h3> { this.state.description } </h3>
                 
                   <Time
                     sunset={ this.state.formattedSunset }
@@ -85,8 +85,6 @@ getWeather = async (selectedOption) => {
                     city={ this.state.city }
                     loadweather={ this.getWeather }
                     error={ this.state.error }
-                    default= {this.state.defaultValue}
-                    // defaultValue={ "Lisbon" }
                   />
                 </figure>
 

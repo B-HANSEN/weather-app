@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'react-select';
-import './styles/city.css';
 
 const options = [
     { value: 'Lisbon', label: 'Lisbon' },
