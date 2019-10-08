@@ -10,24 +10,28 @@ const options = [
 
 
 class City extends React.Component {
-    // TODO: setup default value
     state = { 
-        selectedOption: null     
+        selectedOption: null
     };
 
-    selectedOption = (option) => {   
-        this.props.loadweather(option.value);
+    componentDidMount() {
+        this.props.loadweather(options[0].value);
+    }
+
+    selectedOption = (option) => {  
+    this.props.loadweather(option.value);
     }
 
         render() {
-            const { selectedOption } = this.state;
+            const { selectedValue } = this.state;
 
             return (
                     <Select
-                        value={ selectedOption }
-                        onChange={ this.selectedOption }
-                        options={ options }
+                        value={ selectedValue }
+                        label={ this.state.label }
+                        options={ options }   
                         defaultValue={{ value: 'Lisbon', label: 'Lisbon' }}
+                        onChange={ this.selectedOption }  
                     />
             );
         }

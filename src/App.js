@@ -5,7 +5,6 @@ import City from './Components/City'
 import './App.css';
 
 const Api_Key = "c1d79600e28a5b4a4ef959688dfa55d3";
-// http://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=c1d79600e28a5b4a4ef959688dfa55d3
 
 class App extends React.Component {
    state = {
@@ -17,8 +16,7 @@ class App extends React.Component {
       formatteSunset: null,
       formattedSunrise: null,
       description: "",
-      error: false,
-      selectedOption: null
+      error: false
     };
 
 calCelsius(temp) {
@@ -31,16 +29,17 @@ calFahrenheit(celsius) {
   return fahrenheit;
 }
 
-calUnix(t) {
-  var dt = new Date(t*1000);
-  var hr = dt.getHours();
-  var m = "0" + dt.getMinutes();
-  return hr + ':' + m.substr(-2)
+calUnix(timestamp) {
+  var date = new Date(timestamp * 1000);
+  var hours = ("0" + date.getHours()).slice(-2);
+  var minutes = ("0" + date.getMinutes()).slice(-2);
+  return `${hours} : ${minutes}`
 }
 
 switchTemp = (checked) => { 
-  this.setState({ checked: checked })
+  this.setState({ checked: !checked })
 };
+
 
 getWeather = async (selectedOption) => {
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${selectedOption}&appid=${Api_Key}`)
@@ -71,23 +70,23 @@ getWeather = async (selectedOption) => {
                 <figure>
                   
                   <img src={`https://openweathermap.org/img/wn/${this.state.icon}.png`} alt="" />
-                  { this.state.checked
+                  { !this.state.checked
                     ? <p>{ this.state.celsius } °C </p>
                     : <p>{ this.state.fahrenheit } °F </p>
                   }
                   { this.state.description }
                 
-          {/* TODO: revise time code to actual local time */}
                   <Time
                     sunset={ this.state.formattedSunset }
                     sunrise={ this.state.formattedSunrise }
                   />
 
-          {/* TODO: add label to drop-down */}
                   <City className="dropdown"
                     city={ this.state.city }
                     loadweather={ this.getWeather }
                     error={ this.state.error }
+                    default= {this.state.defaultValue}
+                    // defaultValue={ "Lisbon" }
                   />
                 </figure>
 
@@ -102,5 +101,3 @@ getWeather = async (selectedOption) => {
 }
 
 export default App;
-
-
