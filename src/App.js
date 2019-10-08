@@ -4,43 +4,40 @@ import Time from './Components/Time'
 import City from './Components/City'
 import './App.css';
 
+// personal API Key from openweathermap.org
 const Api_Key = "c1d79600e28a5b4a4ef959688dfa55d3";
 
-class App extends React.Component {
-   state = {
-      city: null,
-      icon: null,
-      main: null,
-      celsius: null,
-      fahrenheit: null,
-      formatteSunset: null,
-      formattedSunrise: null,
-      description: "",
-      error: false
-    };
 
+class App extends React.Component {
+   state = {};
+
+// convert Kelvin to Celsius
 calCelsius(temp) {
   let celsius = Math.floor(temp - 273.15);
   return celsius;
 }
 
+// convert Celsius to Fahrenheit
 calFahrenheit(celsius) {
   let fahrenheit = Math.floor(9/5 * celsius + 32);
   return fahrenheit;
 }
 
-calUnix(timestamp) {
-  var date = new Date(timestamp * 1000);
-  var hours = ("0" + date.getHours()).slice(-2);
-  var minutes = ("0" + date.getMinutes()).slice(-2);
-  return `${hours} : ${minutes}`
-}
-
+// toggle temp unit
 switchTemp = (checked) => { 
   this.setState({ checked: !checked })
 };
 
+// convert Unix timestamp to hr:min
+calUnix(timestamp) {
+  var date = new Date(timestamp * 1000);
+  var hours = ("0" + date.getHours()).slice(-2);
+  var minutes = ("0" + date.getMinutes()).slice(-2);
+  return `${hours}:${minutes}`
+}
 
+
+// data fetch from remote and convert to JSON
 getWeather = async (selectedOption) => {
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${selectedOption}&appid=${Api_Key}`)
     const response = await api_call.json();
@@ -67,8 +64,8 @@ getWeather = async (selectedOption) => {
               </header>      
               
               <main>
+
                 <figure>
-                  
                   <img src={`https://openweathermap.org/img/wn/${this.state.icon}.png`} alt="" />
                   { !this.state.checked
                     ? <h3>{ this.state.celsius } °C </h3>
@@ -81,7 +78,7 @@ getWeather = async (selectedOption) => {
                     sunrise={ this.state.formattedSunrise }
                   />
 
-                  <City className="dropdown"
+                  <City
                     city={ this.state.city }
                     loadweather={ this.getWeather }
                     error={ this.state.error }
@@ -90,7 +87,8 @@ getWeather = async (selectedOption) => {
 
                 <Toggle
                   toggleTemp= { this.switchTemp }
-                /> 
+                />
+
               </main>
 
           </div>

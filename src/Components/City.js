@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
+
 const options = [
     { value: 'Lisbon', label: 'Lisbon' },
     { value: 'New York', label: 'New York' },

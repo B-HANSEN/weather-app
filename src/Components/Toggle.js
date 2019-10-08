@@ -2,17 +2,13 @@ import React from 'react';
 import './styles/toggle.css';
 
 
-
 class Toggle extends React.Component {
     state = {
-        checked: false,
-        // type: true
+        checked: false
     };
 
-    selectedUnit = (checked) => {   
-    // selectedUnit = (type) => {   
+    selectedUnit = () => {    
         this.setState({ checked: !this.state.checked });
-        // this.props.toggleTemp(type);
         this.props.toggleTemp(this.state.checked);
     }
 
